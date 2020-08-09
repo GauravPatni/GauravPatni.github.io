@@ -53,18 +53,27 @@ body {
 
 #puzzle_body {
 
-    position        : absolute;
-    top             : 50%;
-    left            : 50%;
-    transform       : translate(-50%, -50%);
+    position           : absolute;
+    top                : 50%;
+    left               : 50%;
+    transform          : translate(-50%, -50%);
     /* background-color: pink; */
 }
 
 .grid_container {
     display                 : grid;
     grid-template-columns   : auto auto auto;
-    /* grid-template-rows   : 20.75vw 20.75vw; */
-    grid-template-rows      : 40vh 40vh;
+    grid-template-rows   : 20.75vw 20.75vw;
+    /* grid-template-rows      : 40vh 40vh; */
+    gap                     : 4vh 2vh;
+
+}
+
+.grid_container_mobile {
+    display                 : grid;
+    grid-template-columns   : auto auto;
+    grid-template-rows   : 20.75vw 20.75vw 75vw;
+    /* grid-template-rows      : 40vw 40vw; */
     gap                     : 4vh 2vh;
 
 }
@@ -72,16 +81,26 @@ body {
 /* Grid Items */
 
 .grid_item_outer {
-    position   : relative;
-    /* height  : 20.75vw;
-    width      : 20.75vw; */
-    height     : 40vh;
-    width      : 40vh;
-    border     : 4px solid #412209;
+    position: relative;
+    height  : 20.75vw;
+    width   : 20.75vw;
+
+    border: 4px solid #412209;
 
     border-radius   : 2vh;
     background-color: white;
 }
+
+/* .grid_item_outer_mobile{
+    position   : relative;
+
+    height     : 40wh;
+    width      : 40wh;
+    border     : 4px solid #412209;
+
+    border-radius   : 2vh;
+    background-color: white;
+} */
 
 .grid_item_inner {
     position: absolute;

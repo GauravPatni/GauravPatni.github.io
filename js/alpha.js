@@ -5,6 +5,8 @@ let characterIndexList = ['1', '2', '3', '4', '5', '6', '7'];
 let imgsState = [];
 let currentAlpha = "Z";
 
+let divHeight = 0;
+let divWidth = 0;
 
 
 $("#puzzle_body  img").click(onCardClick);
@@ -124,11 +126,32 @@ function audioBackPlay() {
 }
 
 //-----------------------------------------------------
+function setGridSize() {
+    if (divHeight > divWidth) {
+        $("#puzzle_body").removeClass("grid_container");
+        $("#puzzle_body").addClass("grid_container_mobile");
+    }
+}
 
+$(window).on("orientationchange", function (event) {
+    if (event.orientation =="portrait") {
+        $("#puzzle_body").removeClass("grid_container");
+        $("#puzzle_body").addClass("grid_container_mobile");
+    }
+    else{
+        $("#puzzle_body").removeClass("grid_container_mobile");
+        $("#puzzle_body").addClass("grid_container");
+    }
+    $("#orientation").text("This device is in " + event.orientation + " mode!");
+});
+
+
+//-----------------------------------------------------
 function init() {
 
     console.log("Init Start");
     alphabetIndex = -1;
+    setGridSize();
     audioBackPlay();
     setImgState();
     generateAlphabetsList();
@@ -137,10 +160,13 @@ function init() {
 
 //-----------------------------------------------------
 
+divHeight = $(window).height();
+divWidth = $(window).width();
 
 init();
 
-
+// console.log("W = " + $(window).width());
+// console.log($(window).height());
 
 
 

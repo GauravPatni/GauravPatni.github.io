@@ -23,7 +23,7 @@ function onCardClick() {
         $(this).attr("src", url);
 
         // Play sound
-        audioBack.play();
+        // audioBack.play();
         audioBack.volume = 0.7;
     }
     else {
@@ -33,6 +33,7 @@ function onCardClick() {
         var audioItem = new Audio(`assets/sound/${currentAlpha}/${currentAlpha}` + puzzleIndexList[cardImgIndex] + '.mp3');
         audioItem.play();
         audioItem.onended = function(){
+            audioBack.play();
             audioBack.volume = 0.7;
             
         }
@@ -120,6 +121,8 @@ function setImgState() {
 //-----------------------------------------------------
 
 function init() {
+    audioBack.loop = true;
+    audioBack.play();
     console.log("Init Start");
     alphabetIndex = -1;
     setImgState();

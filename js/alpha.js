@@ -36,6 +36,7 @@ function onCardClick() {
 function playPuzzleSound(cardImgIndex) {
 
     $("#audio1").prop("volume", 0.1);
+    $("#audio1").trigger('play');
     var audioItem = new Audio(`assets/sound/${currentAlpha}/${currentAlpha}` + puzzleIndexList[cardImgIndex] + '.mp3');
     audioItem.play();
     audioItem.onended = function () {

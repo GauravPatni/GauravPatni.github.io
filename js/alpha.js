@@ -5,7 +5,6 @@ let characterIndexList = ['1', '2', '3', '4', '5', '6', '7'];
 let imgsState = [];
 let currentAlpha = "Z";
 
-var audioBack = new Audio('assets/sound/back1.mp3');
 
 
 $("#puzzle_body  img").click(onCardClick);
@@ -17,35 +16,33 @@ function onCardClick() {
     let cardImgIndex = $(this).attr("id").split('-')[1] - 1;
     if (imgsState[cardImgIndex] == 0) { // first time click . Currently showing characters ing
 
-        imgsState[cardImgIndex] =1;
+        imgsState[cardImgIndex] = 1;
         // change src to puzzle
         let url = `assets/images/${currentAlpha}/${currentAlpha}` + puzzleIndexList[cardImgIndex] + ".png"
         $(this).attr("src", url);
 
         // Play sound
-        // audioBack.play();
-        audioBack.volume = 0.7;
+
+        playPuzzleSound(cardImgIndex);
     }
     else {
         //only play sound 
-        console.log("volume Control");
-        audioBack.volume = 0.1;
-        var audioItem = new Audio(`assets/sound/${currentAlpha}/${currentAlpha}` + puzzleIndexList[cardImgIndex] + '.mp3');
-        audioItem.play();
-        audioItem.onended = function(){
-            audioBack.play();
-            audioBack.volume = 0.7;
-            
-        }
+        playPuzzleSound(cardImgIndex);
     }
 
 }
 
 
-// $(".puzzImg").click(function (e) {
-//     console.log(e);
-// });
+function playPuzzleSound(cardImgIndex) {
 
+    $("#audio1").prop("volume", 0.1);
+    var audioItem = new Audio(`assets/sound/${currentAlpha}/${currentAlpha}` + puzzleIndexList[cardImgIndex] + '.mp3');
+    audioItem.play();
+    audioItem.onended = function () {
+        $("#audio1").prop("volume", 0.5);
+
+    }
+}
 //-------------------------------------------------------------------
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -118,13 +115,20 @@ function setImgState() {
 
 }
 
+function audioBackPlay() {
+    $("#audio1").attr("src", 'assets/sound/back1.mp3');
+    $("#audio1").prop("volume", 0.5);
+    $("#audio1").trigger('play');
+    $("#audio1").prop("loop", true);
+}
+
 //-----------------------------------------------------
 
 function init() {
-    audioBack.loop = true;
-    audioBack.play();
+
     console.log("Init Start");
     alphabetIndex = -1;
+    audioBackPlay();
     setImgState();
     generateAlphabetsList();
     nextAlphabetPuzzle();
